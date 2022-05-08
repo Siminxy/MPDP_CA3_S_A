@@ -65,8 +65,11 @@ protected:
 
 	float				mThrustDir;
 	int					mHealth;
+	int					mChargeAmount;
+	float					mTurnSlowdown;
 
 	bool				mIsShooting;
+	bool				mIsCharging;
 };
 
 typedef shared_ptr< RoboCat >	RoboCatPtr;
