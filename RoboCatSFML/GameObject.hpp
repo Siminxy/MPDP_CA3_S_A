@@ -29,8 +29,11 @@ public:
 	float GetRotation()					const { return mRotation; }
 
 	void SetScale(float inScale) { mScale = inScale; }
-	float GetScale()						const { return mScale; }
-
+	float GetScale() { return mScale; }
+	int GetSize() { return (int)mScale; }
+	float GetImgScale() { return mScale / 10; }
+	void IncScale(float incAmount) { mScale += (mScale * incAmount); }
+	void DecScale(float decAmount) { mScale -= (mScale * decAmount); }
 
 	const Vector3& GetLocation() const { return mLocation; }
 	void SetLocation(const Vector3& inLocation) { mLocation = inLocation; }
