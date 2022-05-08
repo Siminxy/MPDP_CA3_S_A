@@ -10,10 +10,11 @@ void ScoreBoardManager::StaticInit()
 
 ScoreBoardManager::ScoreBoardManager()
 {
-	mDefaultColors.push_back(Colors::LightYellow);
-	mDefaultColors.push_back(Colors::LightBlue);
-	mDefaultColors.push_back(Colors::LightPink);
-	mDefaultColors.push_back(Colors::LightGreen);
+	mDefaultColors.push_back(Colors::KWhite);
+	mDefaultColors.push_back(Colors::STan);
+	mDefaultColors.push_back(Colors::SGreen);
+	mDefaultColors.push_back(Colors::APink);
+	mDefaultColors.push_back(Colors::MYellow);
 }
 
 ScoreBoardManager::Entry::Entry(uint32_t inPlayerId, const string& inPlayerName, const Vector3& inColor) :

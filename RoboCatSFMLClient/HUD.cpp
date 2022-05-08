@@ -31,7 +31,7 @@ void HUD::RenderHealth()
 {
 	if (mHealth > 0)
 	{
-		string healthString = StringUtils::Sprintf("Health %d", mHealth);
+		string healthString = StringUtils::Sprintf("Lives %d", mHealth);
 		RenderText(healthString, mHealthOffset, Colors::Red);
 	}
 }

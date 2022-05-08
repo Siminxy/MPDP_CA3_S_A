@@ -194,12 +194,19 @@ namespace Colors
 {
 	static const Vector3 Black(0.0f, 0.0f, 0.0f);
 	static const Vector3 White(255.0f, 255.0f, 255.0f);
-	static const Vector3 Red(255.0f, 0.0f, 0.0f);
+	static const Vector3 Red(212.0f, 25.0f, 0.0f);
 	static const Vector3 Green(0.0f, 255.0f, 0.0f);
 	static const Vector3 Blue(0.0f, 0.0f, 255.0f);
 	static const Vector3 LightYellow(255.0f, 255.0f, 224.4f);
 	static const Vector3 LightBlue(173.4f, 216.75f, 229.5f);
 	static const Vector3 LightPink(255.0f, 181.05f, 193.8f);
 	static const Vector3 LightGreen(142.8f, 237.15f, 142.8f);
+	static const Vector3 Grey(88.0f, 88.0f, 94.0f);
+
+	static const Vector3 STan(204.0f, 153.0f, 0.0f);
+	static const Vector3 KWhite(255.0f, 255.0f, 230.0f);
+	static const Vector3 APink(230.0f, 0.0f, 115.0f);
+	static const Vector3 SGreen(0.0f, 153.0f, 0.0f);
+	static const Vector3 MYellow(179.0f, 119.0f, 0.0f);
 }
 

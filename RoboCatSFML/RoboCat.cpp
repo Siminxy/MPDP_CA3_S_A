@@ -5,18 +5,18 @@ const float WORLD_WIDTH = 1280.f;
 
 RoboCat::RoboCat() :
 	GameObject(),
-	mMaxRotationSpeed(100.f),
-	mMaxLinearSpeed(5000.f),
+	mMaxRotationSpeed(150.f),
+	mMaxLinearSpeed(6000.f),
 	mVelocity(Vector3::Zero),
-	mWallRestitution(0.1f),
-	mCatRestitution(0.1f),
+	mWallRestitution(0.25f),
+	mCatRestitution(0.4f),
 	mThrustDir(0.f),
 	mPlayerId(0),
 	mIsShooting(false),
 	mIsCharging(false),
 	mChargeAmount(2),
 	mTurnSlowdown(0.25),
-	mHealth(10)
+	mHealth(3)
 {
 	SetCollisionRadius(60.f);
 }
