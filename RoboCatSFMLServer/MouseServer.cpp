@@ -17,12 +17,6 @@ bool MouseServer::HandleCollisionWithCat(RoboCat* inCat)
 	SetDoesWantToDie(true);
 
 	ScoreBoardManager::sInstance->IncScore(inCat->GetPlayerId(), 1);
-
+	
 	return false;
 }
-
-
-
-
-
-

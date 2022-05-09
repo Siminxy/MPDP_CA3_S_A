@@ -100,6 +100,21 @@ void RoboCat::ProcessCollisions()
 				if (target->HandleCollisionWithCat(this))
 				{
 					//okay, you hit something!
+
+					//If player is larger, the other player decreases in size
+					if(this->GetSize() > target->GetSize())
+					{
+						//Size change
+						this->IncScale(0.5f);
+						target->IncScale(-0.5f);
+					}
+					else if (this->GetSize() > target->GetSize())
+					{
+						//Size change
+						target->IncScale(0.5f);
+						this->IncScale(-0.5f);
+					}
+
 					//so, project your location far enough that you're not colliding
 					Vector3 dirToTarget = delta;
 					dirToTarget.Normalize2D();

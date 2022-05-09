@@ -10,7 +10,7 @@ Mouse::Mouse()
 bool Mouse::HandleCollisionWithCat(RoboCat* inCat)
 {
 	(void)inCat;
-	inCat->IncScale(0.05f);
+	inCat->IncScale(GetScale() * 0.1);
 	return false;
 }
 

@@ -77,14 +77,15 @@ void RoboCatServer::HandleShooting()
 void RoboCatServer::TakeDamage(int inDamagingPlayerId)
 {
 	mHealth--;
-	//Takes 1/2 of players scale
-	this->DecScale(0.5f);
-	//If no health or too small, they are considered dead
-	if (mHealth <= 0.f || this->GetScale() <= 0.0f)
-	{
-		//score one for damaging player...
-		ScoreBoardManager::sInstance->IncScore(inDamagingPlayerId, 1);
 
+	//score increase for damaging player...
+	ScoreBoardManager::sInstance->IncScore(inDamagingPlayerId, 5);
+	//decrease score for hit player
+	ScoreBoardManager::sInstance->IncScore(this->GetPlayerId(), -5);
+
+	//If no health or too small, they are considered dead
+	if (mHealth <= 0.f || this->GetScale() <= 0.25f)
+	{
 		//and you want to die
 		SetDoesWantToDie(true);
 

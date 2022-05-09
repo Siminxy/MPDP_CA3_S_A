@@ -66,7 +66,7 @@ protected:
 	float				mThrustDir;
 	int					mHealth;
 	int					mChargeAmount;
-	float					mTurnSlowdown;
+	float				mTurnSlowdown;
 
 	bool				mIsShooting;
 	bool				mIsCharging;
