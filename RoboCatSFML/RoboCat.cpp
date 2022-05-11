@@ -100,19 +100,26 @@ void RoboCat::ProcessCollisions()
 				if (target->HandleCollisionWithCat(this))
 				{
 					//okay, you hit something!
+					float time = Timing::sInstance.GetFrameStartTime();
 
-					//If player is larger, the other player decreases in size
-					if(this->GetSize() > target->GetSize())
+					if (Timing::sInstance.GetFrameStartTime() > mTimeBetweenHits)
 					{
-						//Size change
-						this->IncScale(0.5f);
-						target->IncScale(-0.5f);
-					}
-					else if (this->GetSize() > target->GetSize())
-					{
-						//Size change
-						target->IncScale(0.5f);
-						this->IncScale(-0.5f);
+						//not exact, but okay
+						mTimeBetweenHits = time + mTimeBetweenHits;
+
+						//If player is larger, the other player decreases in size
+						if (this->GetSize() > target->GetAsCat()->GetSize())
+						{
+							//Size change
+							this->IncScale(0.5f);
+							target->GetAsCat()->IncScale(-0.5);
+						}
+						else if (this->GetSize() > target->GetAsCat()->GetSize())
+						{
+							//Size change
+							target->GetAsCat()->IncScale(0.5f);
+							this->IncScale(-0.5f);
+						}
 					}
 
 					//so, project your location far enough that you're not colliding
@@ -265,6 +272,18 @@ uint32_t RoboCat::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyS
 		inOutputStream.Write(mHealth, 4);
 
 		writtenState |= ECRS_Health;
+	}
+	else
+	{
+		inOutputStream.Write((bool)false);
+	}
+
+	if (inDirtyState & ECRS_Scale)
+	{
+		inOutputStream.Write((bool)true);
+		inOutputStream.Write(mScale, 4);
+
+		writtenState |= ECRS_Scale;
 	}
 	else
 	{

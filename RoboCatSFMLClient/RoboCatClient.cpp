@@ -19,7 +19,6 @@ void RoboCatClient::HandleDying()
 	}
 }
 
-
 void RoboCatClient::Update()
 {
 	//is this the cat owned by us?
@@ -52,6 +51,9 @@ void RoboCatClient::Update()
 			mTimeLocationBecameOutOfSync = 0.f;
 		}
 	}
+
+	//Update scale here??
+	RoboCat::SetScale(mScale);
 }
 
 void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
@@ -123,6 +125,17 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 		inInputStream.Read(mHealth, 4);
 		readState |= ECRS_Health;
 	}
+
+	inInputStream.Read(stateBit);
+	if (stateBit)
+	{
+		mScale = 0;
+		inInputStream.Read(mScale, 4);
+		SetScale(mScale);
+		RoboCatClient::Update();
+		readState |= ECRS_Scale;
+	}
+
 
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{

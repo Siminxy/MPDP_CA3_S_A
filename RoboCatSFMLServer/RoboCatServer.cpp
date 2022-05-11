@@ -3,7 +3,8 @@
 RoboCatServer::RoboCatServer() :
 	mCatControlType(ESCT_Human),
 	mTimeOfNextShot(0.f),
-	mTimeBetweenShots(0.2f)
+	mTimeBetweenShots(0.2f),
+	mTimeBetweenHits(1.0f)
 {}
 
 void RoboCatServer::HandleDying()
@@ -58,6 +59,9 @@ void RoboCatServer::Update()
 	{
 		NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ECRS_Pose);
 	}
+
+	//Update scale here?
+	RoboCat::SetScale(mScale);
 }
 
 void RoboCatServer::HandleShooting()
@@ -76,12 +80,18 @@ void RoboCatServer::HandleShooting()
 
 void RoboCatServer::TakeDamage(int inDamagingPlayerId)
 {
-	mHealth--;
+	float time = Timing::sInstance.GetFrameStartTime();
 
-	//score increase for damaging player...
-	ScoreBoardManager::sInstance->IncScore(inDamagingPlayerId, 5);
-	//decrease score for hit player
-	ScoreBoardManager::sInstance->IncScore(this->GetPlayerId(), -5);
+	if (Timing::sInstance.GetFrameStartTime() > mTimeBetweenHits)
+	{
+		//not exact, but okay
+		mTimeBetweenHits = time + mTimeBetweenHits;
+
+		mHealth--;
+
+		//score increase for damaging player...
+		ScoreBoardManager::sInstance->IncScore(inDamagingPlayerId, 5);
+	}
 
 	//If no health or too small, they are considered dead
 	if (mHealth <= 0.f || this->GetScale() <= 0.25f)

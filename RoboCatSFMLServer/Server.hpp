@@ -21,5 +21,7 @@ private:
 	bool	InitNetworkManager();
 	void	SetupWorld();
 
+	float	mTimeBetweenSpawns;
+
 };
 

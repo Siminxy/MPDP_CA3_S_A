@@ -29,5 +29,7 @@ private:
 	float		mTimeOfNextShot;
 	float		mTimeBetweenShots;
 
+	float		mTimeBetweenHits;
+
 };
 

@@ -30,9 +30,6 @@ public:
 
 	void SetScale(float inScale) { mScale = inScale; }
 	float GetScale() { return mScale; }
-	float GetSize() { return mScale; }
-	float GetImgScale() { return mScale / 10; }
-	void IncScale(float incAmount) { if(mScale < 10.0f) mScale += (mScale * incAmount); }
 
 	const Vector3& GetLocation() const { return mLocation; }
 	void SetLocation(const Vector3& inLocation) { mLocation = inLocation; }
