@@ -9,9 +9,9 @@ public:
 		ECRS_Color = 1 << 1,
 		ECRS_PlayerId = 1 << 2,
 		ECRS_Health = 1 << 3,
-		ECRS_Scale = 1 << 4,
+		ECRS_PlayerSize = 1 << 4,
 
-		ECRS_AllState = ECRS_Pose | ECRS_Color | ECRS_PlayerId | ECRS_Health | ECRS_Scale
+		ECRS_AllState = ECRS_Pose | ECRS_Color | ECRS_PlayerId | ECRS_Health | ECRS_PlayerSize
 	};
 
 
@@ -34,14 +34,6 @@ public:
 
 	void			SetVelocity(const Vector3& inVelocity) { mVelocity = inVelocity; }
 	const Vector3& GetVelocity()						const { return mVelocity; }
-
-	void			SetScale(float inScale) { mScale = inScale; }
-	const float GetScale()						const { return mScale; }
-	float GetSize() { return mScale; }
-	float GetImgScale() { return mScale / 10; }
-	void IncScale(float incAmount) { if (mScale < 10.0f) mScale += (mScale * incAmount); }
-
-
 
 	virtual uint32_t	Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const override;
 
@@ -71,18 +63,14 @@ protected:
 	///move down here for padding reasons...
 
 	float				mLastMoveTimestamp;
+	float				mTurnSlowdown;
+	float				mChargeAmount;
+	float				mTimeBetweenHits;
 
 	float				mThrustDir;
 	int					mHealth;
-	int					mChargeAmount;
-	float				mTurnSlowdown;
-	float				mScale;
 
-	bool				mIsShooting;
 	bool				mIsCharging;
-
-	float		mTimeOfHit;
-	float		mTimeBetweenHits;
 };
 
 typedef shared_ptr< RoboCat >	RoboCatPtr;
