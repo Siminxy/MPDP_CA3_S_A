@@ -52,8 +52,6 @@ void RoboCatClient::Update()
 		}
 	}
 
-	//Update scale here??
-	RoboCat::SetScale(mScale);
 }
 
 void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
@@ -130,10 +128,9 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 	if (stateBit)
 	{
 		mScale = 0;
-		inInputStream.Read(mScale, 4);
+		inInputStream.Read(mScale);
 		SetScale(mScale);
-		RoboCatClient::Update();
-		readState |= ECRS_Scale;
+		readState |= ECRS_PlayerSize;
 	}
 
 

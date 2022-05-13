@@ -28,8 +28,11 @@ public:
 	void SetRotation(float inRotation);
 	float GetRotation()					const { return mRotation; }
 
-	void SetScale(float inScale) { mScale = inScale; }
 	float GetScale() { return mScale; }
+	void SetScale(float inAmount) { mScale = inAmount; }
+	void IncScale(float incAmount) { if (mScale < 10.0f) mScale += (mScale * incAmount); }
+	void DecScale(float decAmount) { mScale -= (mScale * decAmount); }
+
 
 	const Vector3& GetLocation() const { return mLocation; }
 	void SetLocation(const Vector3& inLocation) { mLocation = inLocation; }
@@ -52,14 +55,16 @@ public:
 	virtual uint32_t Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const { (void)inOutputStream; (void)inDirtyState; return 0; }
 	virtual void Read(InputMemoryBitStream& inInputStream) { (void)inInputStream; }
 
+public:
+	float mScale;
+
 private:
 	Vector3	mLocation;
 	Vector3	mColor;
 
 	float mCollisionRadius;
-
 	float mRotation;
-	float mScale;
+	
 	int	mIndexInWorld;
 
 	bool mDoesWantToDie;

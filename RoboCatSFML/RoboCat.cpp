@@ -5,20 +5,19 @@ const float WORLD_WIDTH = 1280.f;
 
 RoboCat::RoboCat() :
 	GameObject(),
-	mMaxRotationSpeed(150.f),
-	mMaxLinearSpeed(6000.f),
+	mMaxRotationSpeed(100.f),
+	mMaxLinearSpeed(5000.f),
 	mVelocity(Vector3::Zero),
-	mWallRestitution(0.25f),
-	mCatRestitution(0.4f),
+	mWallRestitution(0.1f),
+	mCatRestitution(0.1f),
 	mThrustDir(0.f),
 	mPlayerId(0),
-	mIsShooting(false),
 	mIsCharging(false),
-	mChargeAmount(2),
-	mTurnSlowdown(0.25),
+	mTurnSlowdown(0.25f),
+	mChargeAmount(2.0f),
 	mHealth(3)
 {
-	SetCollisionRadius(60.f);
+	SetCollisionRadius(50.f);
 }
 
 void RoboCat::ProcessInput(float inDeltaTime, const InputState& inInputState)
@@ -31,12 +30,12 @@ void RoboCat::ProcessInput(float inDeltaTime, const InputState& inInputState)
 		newRotation = GetRotation() + inInputState.GetDesiredHorizontalDelta() * (mMaxRotationSpeed * mTurnSlowdown) * inDeltaTime;
 	else
 		newRotation = GetRotation() + inInputState.GetDesiredHorizontalDelta() * mMaxRotationSpeed * inDeltaTime;
-	
 	SetRotation(newRotation);
 
 	//moving...
 	float inputForwardDelta = inInputState.GetDesiredVerticalDelta();
 	mThrustDir = inputForwardDelta;
+
 
 	mIsCharging = inInputState.IsCharging();
 
@@ -47,7 +46,7 @@ void RoboCat::AdjustVelocityByThrust(float inDeltaTime)
 	//just set the velocity based on the thrust direction -- no thrust will lead to 0 velocity
 	//simulating acceleration makes the client prediction a bit more complex
 	Vector3 forwardVector = GetForwardVector();
-	if(mIsCharging)
+	if (mIsCharging)
 		mVelocity = forwardVector * (mChargeAmount * (mThrustDir * inDeltaTime * mMaxLinearSpeed));
 	else
 		mVelocity = forwardVector * (mThrustDir * inDeltaTime * mMaxLinearSpeed);
@@ -65,7 +64,6 @@ void RoboCat::SimulateMovement(float inDeltaTime)
 
 void RoboCat::Update()
 {
-
 }
 
 void RoboCat::ProcessCollisions()
@@ -108,20 +106,12 @@ void RoboCat::ProcessCollisions()
 						mTimeBetweenHits = time + mTimeBetweenHits;
 
 						//If player is larger, the other player decreases in size
-						if (this->GetSize() > target->GetAsCat()->GetSize())
-						{
-							//Size change
-							this->IncScale(0.5f);
-							target->GetAsCat()->IncScale(-0.5);
-						}
-						else if (this->GetSize() > target->GetAsCat()->GetSize())
-						{
-							//Size change
-							target->GetAsCat()->IncScale(0.5f);
-							this->IncScale(-0.5f);
-						}
-					}
+						if (this->GetScale() > target->GetScale())
+							this->IncScale(0.5);
+						else if (this->GetScale() < target->GetScale());
+							target->IncScale(0.5);
 
+					}
 					//so, project your location far enough that you're not colliding
 					Vector3 dirToTarget = delta;
 					dirToTarget.Normalize2D();
@@ -278,12 +268,12 @@ uint32_t RoboCat::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyS
 		inOutputStream.Write((bool)false);
 	}
 
-	if (inDirtyState & ECRS_Scale)
+	if (inDirtyState & ECRS_PlayerSize)
 	{
 		inOutputStream.Write((bool)true);
-		inOutputStream.Write(mScale, 4);
+		inOutputStream.Write(mScale);
 
-		writtenState |= ECRS_Scale;
+		writtenState |= ECRS_PlayerSize;
 	}
 	else
 	{

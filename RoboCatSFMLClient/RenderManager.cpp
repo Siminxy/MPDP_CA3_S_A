@@ -56,7 +56,7 @@ void RenderManager::RenderComponents()
 {
 	//Get the logical viewport so we can pass this to the SpriteComponents when it's draw time
 	for (SpriteComponent* c : mComponents)
-	{	
+	{
 		WindowManager::sInstance->draw(c->GetSprite());	
 	}
 }
@@ -66,7 +66,7 @@ void RenderManager::Render()
 	//
 	// Clear the back buffer
 	//
-	WindowManager::sInstance->clear(sf::Color(211, 236, 181, 255));
+	WindowManager::sInstance->clear(sf::Color(176, 172, 158, 255));
 
 	RenderManager::sInstance->RenderComponents();
 
