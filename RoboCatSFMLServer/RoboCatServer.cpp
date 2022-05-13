@@ -54,6 +54,7 @@ void RoboCatServer::Update()
 	{
 		NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ECRS_Pose);
 	}
+
 }
 
 void RoboCatServer::TakeDamage(int inDamagingPlayerId)

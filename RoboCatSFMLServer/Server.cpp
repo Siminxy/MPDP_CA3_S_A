@@ -66,8 +66,6 @@ namespace
 			go->SetLocation(mouseLocation);
 		}
 	}
-
-
 }
 
 
@@ -75,6 +73,13 @@ void Server::SetupWorld()
 {
 	//spawn some random mice
 	CreateRandomMice(10 + (rand() % 5));
+
+	mTimeBetweenSpawns = 5;
+}
+
+void Server::MoreCorn(int num)
+{
+	//CreateRandomMice(num);
 }
 
 void Server::DoFrame()
@@ -89,12 +94,12 @@ void Server::DoFrame()
 
 	NetworkManagerServer::sInstance->SendOutgoingPackets();
 
-	//float time = Timing::sInstance.GetFrameStartTime();
-	//if (Timing::sInstance.GetFrameStartTime() > mTimeBetweenSpawns)
-	//{
-	//	mTimeBetweenSpawns = time + mTimeBetweenSpawns;
-	//	CreateRandomMice(5 + rand() % 5);
-	//}
+	float time = Timing::sInstance.GetFrameStartTime();
+	if ((int)Timing::sInstance.GetFrameStartTime() % 10 > mTimeBetweenSpawns)
+	{
+		//mTimeBetweenSpawns = time + mTimeBetweenSpawns;
+		CreateRandomMice(1);
+	}
 
 }
 
