@@ -74,12 +74,7 @@ void Server::SetupWorld()
 	//spawn some random mice
 	CreateRandomMice(10 + (rand() % 5));
 
-	mTimeBetweenSpawns = 5;
-}
-
-void Server::MoreCorn(int num)
-{
-	//CreateRandomMice(num);
+	mTimeBetweenSpawns = 10;
 }
 
 void Server::DoFrame()
@@ -94,10 +89,9 @@ void Server::DoFrame()
 
 	NetworkManagerServer::sInstance->SendOutgoingPackets();
 
-	float time = Timing::sInstance.GetFrameStartTime();
-	if ((int)Timing::sInstance.GetFrameStartTime() % 10 > mTimeBetweenSpawns)
+	//Corn every 10 seconds
+	if ((int)Timing::sInstance.GetFrameStartTime() % (mTimeBetweenSpawns + 1) == mTimeBetweenSpawns)
 	{
-		//mTimeBetweenSpawns = time + mTimeBetweenSpawns;
 		CreateRandomMice(1);
 	}
 

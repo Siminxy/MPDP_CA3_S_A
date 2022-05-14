@@ -18,7 +18,5 @@ bool MouseServer::HandleCollisionWithCat(RoboCat* inCat)
 
 	ScoreBoardManager::sInstance->IncScore(inCat->GetPlayerId(), 1);
 
-	Server::MoreCorn(1);
-
 	return false;
 }

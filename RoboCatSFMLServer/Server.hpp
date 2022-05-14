@@ -14,18 +14,14 @@ public:
 	RoboCatPtr	GetCatForPlayer(int inPlayerId);
 	void	SpawnCatForPlayer(int inPlayerId);
 
-	static void MoreCorn(int num);
-
 
 private:
 	Server();
 
-	
-
 	bool	InitNetworkManager();
 	void	SetupWorld();
 
-	float	mTimeBetweenSpawns;
+	int	mTimeBetweenSpawns;
 
 };
 
