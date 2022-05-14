@@ -8,7 +8,7 @@ class GameObject
 public:
 	CLASS_IDENTIFICATION('GOBJ', GameObject)
 
-	GameObject();
+		GameObject();
 	virtual ~GameObject() {}
 
 	virtual RoboCat* GetAsCat() { return nullptr; }
@@ -30,9 +30,8 @@ public:
 
 	float GetScale() { return mScale; }
 	void SetScale(float inAmount) { mScale = inAmount; }
-	void IncScale(float incAmount) { if (mScale < 10.0f) mScale += (mScale * incAmount); }
-	void DecScale(float decAmount) { mScale -= (mScale * decAmount); }
-
+	void IncScale(float incAmount) { if (mScale < 10.0f) mScale += incAmount; else mScale = 10.0f; }
+	void DecScale(float decAmount) { mScale -= decAmount; }
 
 	const Vector3& GetLocation() const { return mLocation; }
 	void SetLocation(const Vector3& inLocation) { mLocation = inLocation; }

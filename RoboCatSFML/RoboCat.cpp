@@ -15,7 +15,8 @@ RoboCat::RoboCat() :
 	mIsCharging(false),
 	mTurnSlowdown(0.25f),
 	mChargeAmount(2.0f),
-	mHealth(3)
+	mHealth(3),
+	mTimeBetweenHits(1.0f)
 {
 	SetCollisionRadius(50.f);
 }
@@ -94,24 +95,9 @@ void RoboCat::ProcessCollisions()
 			if (distSq < (collisionDist * collisionDist))
 			{
 				//first, tell the other guy there was a collision with a cat, so it can do something...
-
 				if (target->HandleCollisionWithCat(this))
 				{
 					//okay, you hit something!
-					float time = Timing::sInstance.GetFrameStartTime();
-
-					if (Timing::sInstance.GetFrameStartTime() > mTimeBetweenHits)
-					{
-						//not exact, but okay
-						mTimeBetweenHits = time + mTimeBetweenHits;
-
-						//If player is larger, the other player decreases in size
-						if (this->GetScale() > target->GetScale())
-							this->IncScale(0.5);
-						else if (this->GetScale() < target->GetScale());
-							target->IncScale(0.5);
-
-					}
 					//so, project your location far enough that you're not colliding
 					Vector3 dirToTarget = delta;
 					dirToTarget.Normalize2D();

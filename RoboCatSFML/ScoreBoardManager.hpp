@@ -38,6 +38,9 @@ public:
 	bool	RemoveEntry(uint32_t inPlayerId);
 	void	AddEntry(uint32_t inPlayerId, const string& inPlayerName);
 	void	IncScore(uint32_t inPlayerId, int inAmount);
+	void DecScore(uint32_t inPlayerId, int inAmount);
+	int GetPlayerScore(uint32_t inPlayerId);
+	bool CanAttackOthers(uint32_t inPlayerId);
 
 	bool	Write(OutputMemoryBitStream& inOutputStream) const;
 	bool	Read(InputMemoryBitStream& inInputStream);

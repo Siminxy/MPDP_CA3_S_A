@@ -11,6 +11,7 @@ public:
 	virtual void HandleDying() override;
 
 	virtual void Update() override;
+	bool HandleCollisionWithCat(RoboCat* inCat) override;
 
 	void SetCatControlType(ECatControlType inCatControlType) { mCatControlType = inCatControlType; }
 
@@ -23,7 +24,8 @@ private:
 
 	ECatControlType	mCatControlType;
 
-	float		mTimeBetweenHits;
+	int			mHitCooldown;
+	bool		mCanBeHit;
 
 };
 

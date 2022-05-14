@@ -80,7 +80,30 @@ void ScoreBoardManager::IncScore(uint32_t inPlayerId, int inAmount)
 	}
 }
 
+void ScoreBoardManager::DecScore(uint32_t inPlayerId, int inAmount)
+{
+	Entry* entry = GetEntry(inPlayerId);
+	if (entry)
+	{
+		entry->SetScore(entry->GetScore() - inAmount);
+	}
+}
 
+int ScoreBoardManager::GetPlayerScore(uint32_t inPlayerId)
+{
+	Entry* entry = GetEntry(inPlayerId);
+	if (entry)
+		return entry->GetScore();
+	return -1;
+}
+
+bool ScoreBoardManager::CanAttackOthers(uint32_t inPlayerId)
+{
+	if (GetPlayerScore(inPlayerId) >= 20)
+		return true;
+
+	return false;
+}
 
 bool ScoreBoardManager::Write(OutputMemoryBitStream& inOutputStream) const
 {
