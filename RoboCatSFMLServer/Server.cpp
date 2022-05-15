@@ -112,6 +112,7 @@ void Server::SpawnCatForPlayer(int inPlayerId)
 	RoboCatPtr cat = std::static_pointer_cast<RoboCat>(GameObjectRegistry::sInstance->CreateGameObject('RCAT'));
 	cat->SetColor(ScoreBoardManager::sInstance->GetEntry(inPlayerId)->GetColor());
 	cat->SetPlayerId(inPlayerId);
+	cat->SetScale(1.0f);
 	//gotta pick a better spawn location than this...
 	cat->SetLocation(Vector3(600.f - static_cast<float>(inPlayerId) + rand() % 100, 200.f + rand() % 300, 0.f));
 }
