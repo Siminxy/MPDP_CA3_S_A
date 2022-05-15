@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ClientProxy.hpp" />
+    <ClInclude Include="GooseServer.hpp" />
     <ClInclude Include="MouseServer.hpp" />
     <ClInclude Include="NetworkManagerServer.hpp" />
     <ClInclude Include="ReplicationManagerServer.hpp" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientProxy.cpp" />
+    <ClCompile Include="GooseServer.cpp" />
     <ClCompile Include="MouseServer.cpp" />
     <ClCompile Include="NetworkManagerServer.cpp" />
     <ClCompile Include="ReplicationManagerServer.cpp" />

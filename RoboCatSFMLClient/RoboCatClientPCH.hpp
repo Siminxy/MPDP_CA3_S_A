@@ -13,6 +13,7 @@
 #include "RoboCatClient.hpp"
 #include "MouseClient.hpp"
 #include "YarnClient.hpp"
+#include "GooseClient.hpp"
 
 #include "HUD.hpp"
 
