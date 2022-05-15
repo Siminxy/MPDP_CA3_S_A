@@ -74,14 +74,14 @@ bool RoboCatServer::HandleCollisionWithCat(RoboCat* inCat)
 			if (ScoreBoardManager::sInstance->GetPlayerScore(inCat->GetPlayerId()) < ScoreBoardManager::sInstance->GetPlayerScore(GetPlayerId()))
 			{
 				static_cast<RoboCatServer*>(inCat)->TakeDamage(GetPlayerId());
-				inCat->IncScale(0.25);
-				DecScale(0.25f);
+				IncScale(0.25);
+				inCat->DecScale(0.25f);
 			}
 			else if (ScoreBoardManager::sInstance->GetPlayerScore(inCat->GetPlayerId()) > ScoreBoardManager::sInstance->GetPlayerScore(GetPlayerId()))
 			{
 				static_cast<RoboCatServer*>(GetAsCat())->TakeDamage(GetPlayerId());
-				IncScale(0.25);
-				inCat->DecScale(0.25f);
+				inCat->IncScale(0.25);
+				DecScale(0.25f);
 			}
 
 			
