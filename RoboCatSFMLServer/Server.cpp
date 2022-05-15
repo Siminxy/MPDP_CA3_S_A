@@ -68,6 +68,18 @@ namespace
 			go->SetLocation(mouseLocation);
 		}
 	}
+
+	void SpawnGoose(int inGooseScale)
+	{
+		Vector3 gooseMin(100.f, 50.f, 0.f);
+		Vector3 gooseMax(1200.f, 650.f, 0.f);
+
+		GameObjectPtr go = GameObjectRegistry::sInstance->CreateGameObject('GOOS');
+		Vector3 mouseLocation = RoboMath::GetRandomVector(gooseMin, gooseMax);
+		go->SetLocation(mouseLocation);
+		//go->SetScale(inGooseScale);
+	}
+
 }
 
 
@@ -77,6 +89,8 @@ void Server::SetupWorld()
 	CreateRandomMice(10 + (rand() % 5));
 
 	mTimeBetweenSpawns = 10;
+
+	//SpawnGoose(0.5);
 }
 
 void Server::DoFrame()
@@ -96,6 +110,12 @@ void Server::DoFrame()
 	{
 		CreateRandomMice(1);
 	}
+
+	//Goose every some seconds
+	//if ((int)Timing::sInstance.GetFrameStartTime() % (mTimeBetweenSpawns + 5) == mTimeBetweenSpawns)
+	//{
+	//	SpawnGoose(1);
+	//}
 
 }
 
