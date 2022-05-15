@@ -89,7 +89,7 @@ bool RoboCatServer::HandleCollisionWithCat(RoboCat* inCat)
 	}
 
 	//Inform of scale
-	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ECRS_Health);
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ECRS_PlayerSize);
 
 	return false;
 }
