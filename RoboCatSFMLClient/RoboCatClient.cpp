@@ -2,15 +2,32 @@
 
 RoboCatClient::RoboCatClient() :
 	mTimeLocationBecameOutOfSync(0.f),
-	mTimeVelocityBecameOutOfSync(0.f)
+	mTimeVelocityBecameOutOfSync(0.f),
+	mCanMusicPlay(false)
 {
 	mSpriteComponent.reset(new PlayerSpriteComponent(this));
 	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture("hen"));
+	HandleBGMMusic();
+}
+
+void RoboCatClient::HandleBGMMusic()
+{
+	if (mMusic.openFromFile("../Assets/BarnBeat.wav"))
+	{
+		mCanMusicPlay = true;
+		mMusic.setLoop(true);
+	}
+
+	if (mCanMusicPlay)
+		mMusic.play();
 }
 
 void RoboCatClient::HandleDying()
 {
 	RoboCat::HandleDying();
+
+	if (mCanMusicPlay)
+		mMusic.stop();
 
 	//and if we're local, tell the hud so our health goes away!
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
