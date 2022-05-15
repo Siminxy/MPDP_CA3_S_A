@@ -31,7 +31,7 @@ public:
 	float GetScale() { return mScale; }
 	void SetScale(float inAmount) { mScale = inAmount; }
 	void IncScale(float incAmount) { if (mScale < 10.0f) mScale += incAmount; else mScale = 10.0f; }
-	void DecScale(float decAmount) { mScale -= decAmount; }
+	void DecScale(float decAmount) { if (mScale > 0.5f) mScale += decAmount; else mScale = 0.5f; }
 
 	const Vector3& GetLocation() const { return mLocation; }
 	void SetLocation(const Vector3& inLocation) { mLocation = inLocation; }

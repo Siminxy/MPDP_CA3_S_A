@@ -98,8 +98,8 @@ void RoboCatServer::TakeDamage(int inDamagingPlayerId)
 {
 	mHealth--;
 
-	//If no health or too small, they are considered dead
-	if (mHealth <= 0.f || this->GetScale() <= 0.25f)
+	//If no health they are considered dead
+	if (mHealth <= 0.f)
 	{
 		//+10 for kills
 		ScoreBoardManager::sInstance->IncScore(inDamagingPlayerId, 10);
