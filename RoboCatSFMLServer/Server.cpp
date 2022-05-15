@@ -1,8 +1,5 @@
 
 #include "RoboCatServerPCH.hpp"
-#include <iostream>
-
-
 
 //uncomment this when you begin working on the server
 
@@ -35,6 +32,9 @@ Server::Server()
 
 int Server::Run()
 {
+	//waits for 10 seconds
+	//Sleep(10000);
+
 	SetupWorld();
 
 	return Engine::Run();
