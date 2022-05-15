@@ -13,11 +13,14 @@ public:
 
 protected:
 	RoboCatClient();
+	void HandleBGMMusic();
 
 
 private:
 	void InterpolateClientSidePrediction(float inOldRotation, const Vector3& inOldLocation, const Vector3& inOldVelocity, bool inIsForRemoteCat);
 	float				mTimeLocationBecameOutOfSync;
+	bool				mCanMusicPlay;
+	sf::Music			mMusic;
 	float				mTimeVelocityBecameOutOfSync;
 
 	SpriteComponentPtr	mSpriteComponent;
